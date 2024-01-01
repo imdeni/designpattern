@@ -1,0 +1,14 @@
+D:\project\state\bin\Debug\net7.0\state.exe
+D:\project\state\bin\Debug\net7.0\state.deps.json
+D:\project\state\bin\Debug\net7.0\state.runtimeconfig.json
+D:\project\state\bin\Debug\net7.0\state.dll
+D:\project\state\bin\Debug\net7.0\state.pdb
+D:\project\state\obj\Debug\net7.0\state.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\state\obj\Debug\net7.0\state.AssemblyInfoInputs.cache
+D:\project\state\obj\Debug\net7.0\state.AssemblyInfo.cs
+D:\project\state\obj\Debug\net7.0\state.csproj.CoreCompileInputs.cache
+D:\project\state\obj\Debug\net7.0\state.dll
+D:\project\state\obj\Debug\net7.0\refint\state.dll
+D:\project\state\obj\Debug\net7.0\state.pdb
+D:\project\state\obj\Debug\net7.0\state.genruntimeconfig.cache
+D:\project\state\obj\Debug\net7.0\ref\state.dll

@@ -1,140 +1,54 @@
-﻿// State Code
-class Program
-{
-    public interface StateBase
+﻿using System;
 
-    {
+// State interface
+interface PackageState {
+    void UpdateState(DeliveryContext context);
+}
 
-        void Change(Context context);
+// Concrete state classes
+class OrderedState : PackageState {
+    public void UpdateState(DeliveryContext context) {
+        Console.WriteLine("Package is in the ordered state.");
+        context.SetState(new ShippedState());
+    }
+}
 
+class ShippedState : PackageState {
+    public void UpdateState(DeliveryContext context) {
+        Console.WriteLine("Package is in the shipped state.");
+        context.SetState(new DeliveredState());
+    }
+}
+
+class DeliveredState : PackageState {
+    public void UpdateState(DeliveryContext context) {
+        Console.WriteLine("Package is in the delivered state.");
+        // Additional logic or actions specific to the delivered state
+    }
+}
+
+// Context class
+class DeliveryContext {
+    private PackageState currentState;
+
+    public DeliveryContext() {
+        currentState = new OrderedState();
     }
 
-
-
-    public class StateA : StateBase
-
-    {
-
-        public void Change(Context context)
-
-        {
-
-            //Change state of context from A to B.
-
-            context.State = new StateB();
-
-            Console.WriteLine("Change state from A to B.");
-
-        }
-
+    public void SetState(PackageState state) {
+        currentState = state;
     }
 
-
-
-    public class StateB : StateBase
-
-    {
-
-        public void Change(Context context)
-
-        {
-
-            //Change state of context from B to C.
-
-            context.State = new StateC();
-
-            Console.WriteLine("Change state from B to C.");
-
-        }
-
+    public void Update() {
+        currentState.UpdateState(this);
     }
+}
 
-
-
-    public class StateC : StateBase
-
-    {
-
-        public void Change(Context context)
-
-        {
-
-            //Change state of context from C to A.
-
-            context.State = new StateA();
-
-            Console.WriteLine("Change state from C to A.");
-
-        }
-
-    }
-
-    // Client Code
-
-    public class Context
-
-    {
-
-        public Context(StateBase state)
-
-        {
-
-            State = state;
-
-            Console.WriteLine("Create object of context class with initial State.");
-
-        }
-
-
-
-        public StateBase State { get; set; }
-
-
-
-        /// <summary>
-
-        /// State change request
-
-        /// </summary>
-
-        public void Request()
-
-        {
-
-            State.Change(this);
-
-        }
-
-    }
-
-    // Sample code and output
-
-
-    static void Main(string[] args)
-
-    {
-
-        // create Context object and suplied current state or initial state (state A).
-
-        Context context = new Context(new StateA());
-
-
-
-        //Change state request from A to B.
-
-        context.Request();
-
-
-
-        //Change state request from B to C.
-
-        context.Request();
-
-
-
-        //Change state request from C to A.
-
-        context.Request();
-
+// Usage example
+public class Program {
+    public static void Main(string[] args) {
+        DeliveryContext context = new DeliveryContext();
+        context.Update(); // Transition to ShippedState
+        context.Update(); // Transition to DeliveredState
     }
 }
